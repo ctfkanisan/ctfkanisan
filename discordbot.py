@@ -179,6 +179,27 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+    
+def tts(filename, message):
+    synthesis_input = texttospeech.SynthesisInput(text=message)
+    voice = texttospeech.VoiceSelectionParams(
+        language_code=tts_lang, name=tts_voice
+    )
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3, speaking_rate=1.
+    )
+    response = tts_client.synthesize_speech(
+        input=synthesis_input, voice=voice, audio_config=audio_config
+    )
+    with open(filename, 'wb') as out:
+        out.write(response.audio_content)
+
+
+    
+    
+    
+    
+    
 @client.command()
 async def ヘルプ(ctx):
     message = f'''◆◇◆{client.user.name}の使い方◆◇◆
