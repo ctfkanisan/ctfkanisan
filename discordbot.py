@@ -186,7 +186,7 @@ def tts(filename, message):
         language_code=tts_lang, name=tts_voice
     )
     audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3, speaking_rate=1.0
+        audio_encoding=texttospeech.AudioEncoding.MP3, speaking_rate=0.5
     )
     response = tts_client.synthesize_speech(
         input=synthesis_input, voice=voice, audio_config=audio_config
